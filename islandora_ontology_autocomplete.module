@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * Implements hook_help().
+ *
+ * Displays help and module information.
+ *
+ * @param path
+ *   Which path of the site we're using to display help
+ * @param arg
+ *   Array that holds the current path as returned from arg() function
+ * @return string
+ */
+function islandora_ontology_autocomplete_help($path) {
+  switch ($path) {
+    case "admin/help#islandora_ontology_autocomplete":
+      return '<p>' . t("Adding islandora_ontology_autocomplete widget to Islandora XML forms") . '</p>';
+      break;
+  }
+  return '';
+}
+
+/**
+ * Implements hook_element_info()
+ *
+ * Adds the islandora_ontology_autocomplete element to the form elements
+ */
+function islandora_ontology_autocomplete_element_info() {
+  $types['ontology_autocomplete'] = array(
+    '#input' => TRUE,
+    '#process' => array('islandora_ontology_autocomplete_tag_process'),
+    '#theme' => array('ontology_autocomplete'),
+  );
+  
+  return $types;
+}
+
+/**
+ * Implements hook_theme().
+ * @param $existing
+ * @param $type
+ * @param $theme
+ * @param $path
+ * @return array
+ */
+function islandora_ontology_autocomplete_theme($existing, $type, $theme, $path) {
+  return [
+    'ontology_autocomplete' => [
+      'render element' => 'element',
+      'file' => 'Autocomplete.inc',
+    ]
+  ];
+}
+
+/**
+ * Process a islandora_ontology_autocomplete tag
+ */
+function islandora_ontology_autocomplete_tag_process($element, &$form_state, $complete_form) {
+  form_load_include($form_state, 'inc', 'islandora_ontology_autocomplete', 'Autocomplete');
+  return Autocomplete::process($element, $form_state, $complete_form);
+}
+

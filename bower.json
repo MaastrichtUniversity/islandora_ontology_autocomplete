@@ -1,0 +1,24 @@
+{
+  "name": "Islandora Ontology Autocomplete",
+  "version": "0.1.0",
+  "authors": [
+    "Paul van Schayck <p.vanschayck@maastrichtuniversity.nl>"
+  ],
+  "description": "",
+  "main": "islandora_ontology_autocomplete.module",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "GPLv3",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "typeahead.js": "v0.11.1"
+  }
+}

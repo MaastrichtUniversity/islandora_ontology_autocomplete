@@ -1,0 +1,6 @@
+name = Islandora Ontology Autocomplete
+dependencies[] = xml_forms
+description =
+version = dev
+core = 7.x
+package = Islandora
