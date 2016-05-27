@@ -29,6 +29,7 @@ function islandora_ontology_autocomplete_element_info() {
   $types['ontology_autocomplete'] = array(
     '#input' => TRUE,
     '#process' => array('islandora_ontology_autocomplete_tag_process'),
+    '#theme_wrappers' => array('form_element'),
     '#theme' => array('ontology_autocomplete'),
   );
   

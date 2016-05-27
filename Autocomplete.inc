@@ -15,6 +15,14 @@ class Autocomplete {
       'group' => JS_DEFAULT,
       'every_page' => TRUE
     ));
+    drupal_add_js(drupal_get_path('module', 'islandora_ontology_autocomplete') . '/bower_components/handlebars/handlebars.min.js', array(
+      'group' => JS_DEFAULT,
+      'every_page' => TRUE
+    ));
+    drupal_add_css(drupal_get_path('module', 'islandora_ontology_autocomplete') . '/css//autocomplete.css', array(
+      'group' => CSS_DEFAULT,
+      'every_page' => TRUE
+    ));
   }
 
   /**
@@ -33,7 +41,6 @@ class Autocomplete {
   public static function process(array $element, array &$form_state, array $form = NULL) {
     self::addRequiredResources($form_state);
 
-
     // Config JS
     $element['#attached']['js'] = [
       drupal_get_path('module', 'islandora_ontology_autocomplete') . '/js/autocomplete_field_config.js'
@@ -43,6 +50,7 @@ class Autocomplete {
     $element['#attached']['js'][] = [
       'data' => [
         'autocomplete' => [
+          'names' => [$element['#name']],
         ]
       ],
       'type' => 'setting',
@@ -63,16 +71,11 @@ class Autocomplete {
 function theme_ontology_autocomplete($variables) {
   $element = $variables['element'];
 
-  unset($element['#prefix']);
-  unset($element['#suffix']);
+  $element['#type'] = 'textfield';
 
-  $output = '<div class="autocomplete-container">';
+  $output = '<input id="' . $element['#id'] . '" class="typeahead form-text">';
 
-  $output .= '<div id="' . $element['#id'] . '"></div>';
-  $output .= '<div id="' . $element['#id'] . '-table" class="autocomplete"></div>';
-
-  $output .= $element['#children'];
-  $output .= '</div>';
+  //$output .= $element['#children'];
 
   return $output;
 
