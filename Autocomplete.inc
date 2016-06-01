@@ -75,7 +75,7 @@ function theme_ontology_autocomplete($variables) {
 
   $output = '<input id="' . $element['#id'] . '" class="typeahead form-text">';
 
-  //$output .= $element['#children'];
+  $output .= $element['#children'];
 
   return $output;
 

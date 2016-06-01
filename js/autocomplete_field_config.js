@@ -20,10 +20,16 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
                         display: 'value',
                         limit: 20,
                         templates: getSuggestTemplate()
-                    });
+                    })
+                    .on('typeahead:selected', {'name': name}, termSelected);
 
             })
         });
+
+        function termSelected(eventObject, suggestionObject, suggestionDataset) {
+            jQuery("input[name='" + eventObject.data.name + "[ontologyLabel]']").val(suggestionObject.value);
+            jQuery("input[name='" + eventObject.data.name + "[ontologyId]']").val(suggestionObject.id);
+        }
 
         function getSelectHound (relativePath, ontology, type) {
 
