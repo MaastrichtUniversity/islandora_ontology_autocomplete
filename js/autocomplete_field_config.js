@@ -2,11 +2,11 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
     attach: function (context, settings) {
 
         // Initiate autocomplete and add constructor options.
-        jQuery.each(settings.autocomplete, function (i, name) {
+        jQuery.each(settings.autocomplete.names, function (i, name) {
             var container = '#edit-' + name;
 
             var relativePath = 'http://www.ebi.ac.uk/ols/';
-            var ontology = 'ncbitaxon';
+            var ontology = settings.autocomplete.ontology[i];
             var type = '';
 
             jQuery(container, context).once('processed', function () {

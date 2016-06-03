@@ -51,6 +51,7 @@ class Autocomplete {
       'data' => [
         'autocomplete' => [
           'names' => [$element['#name']],
+          'ontology' => [ isset($element['#user_data']['ontology']) ? $element['#user_data']['ontology'] : 'efo']
         ]
       ],
       'type' => 'setting',
