@@ -10,6 +10,7 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
             var type = '';
 
             jQuery(container, context).once('processed', function () {
+                var lastResults = [];
                 jQuery(container).select2({
                     placeholder: 'Select an ontology term',
                     ajax: {
@@ -31,7 +32,10 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
                     // http://stackoverflow.com/questions/35976322/whats-the-select2-v4-equivalent-of-v3-5s-nextsearchterm
                     nextSearchTerm: function (selectedObject, currentSearchTerm) {
                         return currentSearchTerm;
-                    }
+                    },
+                    createTag: createOverride,
+                    tags: true
+
                 }).on('select2:select', {'name': name}, termSelected);
 
             })
@@ -43,21 +47,21 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
             jQuery("input[name='" + eventObject.data.name + "[ontologyId]']").val(obj.data.iri);
         }
 
-        function getSuggestTemplate (suggestion) {
+        function getSuggestTemplate(suggestion) {
             if (!suggestion.id) {
                 return suggestion.text;
             }
 
-            var label = suggestion.data.label ;
+            var label = suggestion.data.label;
 
             var extra = "";
             if (suggestion.data.synonym != "") {
-                label =  suggestion.data.synonym;
+                label = suggestion.data.synonym;
                 extra = "<div class='sub-text'>synonym for " + suggestion.text + "</div>"
             }
 
             var objectTypeHtml = "<div class='ontology-source'>" + suggestion.data.prefix + "</div>";
-                objectTypeHtml+="&nbsp;<div class='term-source'>" + suggestion.data.shortForm + "</div>";
+            objectTypeHtml += "&nbsp;<div class='term-source'>" + suggestion.data.shortForm + "</div>";
 
 
             return jQuery("" +
@@ -65,16 +69,16 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
             );
         }
 
-        function selectResponse (response, params) {
+        function selectResponse(response, params) {
 
             // Map the remote source JSON array to a JavaScript object array
             var items = jQuery.map(response.response.docs, function (dataItem) {
 
-                var id =   dataItem.id;
+                var id = dataItem.id;
 
                 var label = dataItem.label;
 
-                if ( dataItem.type == 'ontology' ) {
+                if (dataItem.type == 'ontology') {
                     return null;
                 }
 
@@ -110,7 +114,7 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
                     data: {
                         ontology: dataItem.ontology_name,
                         prefix: dataItem.ontology_prefix,
-                        iri : dataItem.iri,
+                        iri: dataItem.iri,
                         label: label,
                         synonym: synonym,
                         shortForm: shortId,
@@ -125,6 +129,21 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
                 results: items,
                 pagination: {
                     more: (params.page * 10) < response.response.numFound
+                }
+            }
+        }
+
+        function createOverride(term) {
+            var text = term.term + "";
+            return {
+                id: term.term, text: text, data: {
+                    ontology: 'override',
+                    prefix: 'override',
+                    iri: 'override',
+                    label: text,
+                    synonym: '',
+                    shortForm: 'none',
+                    type: 'override'
                 }
             }
         }
