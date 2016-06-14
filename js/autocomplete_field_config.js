@@ -7,10 +7,9 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
 
             var relativePath = 'http://www.ebi.ac.uk/ols/';
             var ontology = settings.autocomplete.ontology[i];
-            var type = '';
+            var childrenOf = settings.autocomplete.childrenOf[i];
 
             jQuery(container, context).once('processed', function () {
-                var lastResults = [];
                 jQuery(container).select2({
                     placeholder: 'Select an ontology term',
                     ajax: {
@@ -21,7 +20,8 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
                             return {
                                 q: params.term === undefined ? '*' : params.term, // search term
                                 start: params.page === undefined ? 0 : params.page * 10,
-                                ontology: ontology
+                                ontology: ontology,
+                                childrenOf: childrenOf != '' ? childrenOf : ''
                             };
                         },
                         processResults: selectResponse,
