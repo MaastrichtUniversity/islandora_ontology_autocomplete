@@ -52,7 +52,8 @@ class Autocomplete {
         'autocomplete' => [
           'names' => [$element['#name']],
           'ontology' => [ isset($element['#user_data']['ontology']) ? $element['#user_data']['ontology'] : 'efo'],
-          'childrenOf' => [ isset($element['#user_data']['childrenOf']) ? $element['#user_data']['childrenOf'] : '']
+          'childrenOf' => [ isset($element['#user_data']['childrenOf']) ? $element['#user_data']['childrenOf'] : ''],
+          'overridable' => [ isset($element['#user_data']['overridable']) ? $element['#user_data']['overridable'] : false]
         ]
       ],
       'type' => 'setting',

@@ -8,6 +8,7 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
             var relativePath = 'http://www.ebi.ac.uk/ols/';
             var ontology = settings.autocomplete.ontology[i];
             var childrenOf = settings.autocomplete.childrenOf[i];
+            var overridable = settings.autocomplete.overridable[i];
 
             jQuery(container, context).once('processed', function () {
                 jQuery(container).select2({
@@ -21,7 +22,7 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
                                 q: params.term === undefined ? '*' : params.term, // search term
                                 start: params.page === undefined ? 0 : params.page * 10,
                                 ontology: ontology,
-                                childrenOf: childrenOf != '' ? childrenOf : ''
+                                childrenOf: childrenOf != '' ? childrenOf : undefined
                             };
                         },
                         processResults: selectResponse,
@@ -34,7 +35,7 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
                         return currentSearchTerm;
                     },
                     createTag: createOverride,
-                    tags: true
+                    tags: overridable
 
                 }).on('select2:select', {'name': name}, termSelected);
 
@@ -139,11 +140,11 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
                 id: term.term, text: text, data: {
                     ontology: 'override',
                     prefix: 'override',
-                    iri: 'override',
+                    iri: '',
                     label: text,
                     synonym: '',
                     shortForm: 'none',
-                    type: 'override'
+                    type: ''
                 }
             }
         }
