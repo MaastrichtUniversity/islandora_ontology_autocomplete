@@ -38,7 +38,9 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
                     tags: overridable
 
                 }).on('select2:select', {'name': name}, termSelected);
-
+                
+                // Select an already selected value, not entirely pretty this
+                jQuery(container).val('default_value').trigger('change')
             })
         });
 

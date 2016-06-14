@@ -78,6 +78,14 @@ function theme_ontology_autocomplete($variables) {
 
   $output = '<select id="' . $element['#id'] . '" class="form-select">';
 
+  // Set the value of the already selected item to be visible
+  // TODO: Figure out of this entirely pretty, maybe rethink logic of ontologyLabel
+  if ( ! empty($element['ontologyLabel']['#default_value']) ) {
+    $output .= "<option value='default_value' selected='selected'>{$element['ontologyLabel']['#default_value']}</option>";
+  }
+
+  $output .= '</select>';
+
   $output .= $element['#children'];
 
   return $output;
