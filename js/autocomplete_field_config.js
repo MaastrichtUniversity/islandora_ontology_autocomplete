@@ -5,7 +5,7 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
         jQuery.each(settings.autocomplete.names, function (i, name) {
             var container = '#edit-' + name;
 
-            var relativePath = 'http://www.ebi.ac.uk/ols/';
+            var relativePath = settings.autocomplete.olsURL[i];
             var ontology = settings.autocomplete.ontology[i];
             var childrenOf = settings.autocomplete.childrenOf[i];
             var overridable = settings.autocomplete.overridable[i];
@@ -14,7 +14,7 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
                 jQuery(container).select2({
                     placeholder: 'Select an ontology term',
                     ajax: {
-                        url: relativePath + 'api/select',
+                        url: relativePath + '/api/select',
                         dataType: 'json',
                         delay: 250,
                         data: function (params) {

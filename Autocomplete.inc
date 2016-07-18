@@ -53,10 +53,11 @@ class Autocomplete {
           'names' => [$element['#name']],
           'ontology' => [ isset($element['#user_data']['ontology']) ? $element['#user_data']['ontology'] : 'efo'],
           'childrenOf' => [ isset($element['#user_data']['childrenOf']) ? $element['#user_data']['childrenOf'] : ''],
-          'overridable' => [ isset($element['#user_data']['overridable']) ? $element['#user_data']['overridable'] : false]
+          'overridable' => [ isset($element['#user_data']['overridable']) ? $element['#user_data']['overridable'] : false],
+          'olsURL' => [ isset($_ENV['OLS_URL']) ? $_ENV['OLS_URL'] : 'http://www.ebi.ac.uk/ols' ]
         ]
       ],
-      'type' => 'setting',
+      'type' => 'setting'
     ];
 
 
