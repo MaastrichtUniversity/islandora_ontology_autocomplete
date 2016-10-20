@@ -54,7 +54,7 @@ class Autocomplete {
           'ontology' => [ isset($element['#user_data']['ontology']) ? $element['#user_data']['ontology'] : 'efo'],
           'childrenOf' => [ isset($element['#user_data']['childrenOf']) ? $element['#user_data']['childrenOf'] : ''],
           'overridable' => [ isset($element['#user_data']['overridable']) ? $element['#user_data']['overridable'] : false],
-          'olsURL' => [ !empty(getenv('OLS_URL')) ? getenv('OLS_URL') : 'http://www.ebi.ac.uk/ols' ]
+          'olsURL' => [ getenv('OLS_URL') != '' ? getenv('OLS_URL') : 'http://www.ebi.ac.uk/ols' ]
         ]
       ],
       'type' => 'setting'
