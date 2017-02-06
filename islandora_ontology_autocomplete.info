@@ -1,6 +1,6 @@
 name = Islandora Ontology Autocomplete
 dependencies[] = xml_forms
 description = Selection of ontology terms in an autocomplete widget using the EBI OLS API.
-version = v1.0.0
+version = v1.1.1
 core = 7.x
 package = Islandora
