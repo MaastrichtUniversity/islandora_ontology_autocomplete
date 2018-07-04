@@ -1,0 +1,12 @@
+{
+  "name": "islandora_ontology_autocomplete",
+  "version": "0.1.0",
+  "author":"Paul van Schayck <p.vanschayck@maastrichtuniversity.nl>",
+  "license": "GPLv3",
+  "dependencies": {
+    "@bower_components/select2": "ivaynberg/select2#4.0.*"
+  },
+  "engines": {
+    "yarn": ">= 1.0.0"
+  }
+}

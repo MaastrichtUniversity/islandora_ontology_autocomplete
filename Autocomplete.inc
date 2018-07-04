@@ -11,11 +11,11 @@ class Autocomplete {
    * @param $form_state
    */
   public static function addRequiredResources(&$form_state) {
-    drupal_add_js(drupal_get_path('module', 'islandora_ontology_autocomplete') . '/bower_components/select2/dist/js/select2.min.js', array(
+    drupal_add_js(drupal_get_path('module', 'islandora_ontology_autocomplete') . '/node_modules/@bower_components/select2/dist/js/select2.min.js', array(
       'group' => JS_DEFAULT,
       'every_page' => TRUE
     ));
-    drupal_add_css(drupal_get_path('module', 'islandora_ontology_autocomplete') . '/bower_components/select2/dist/css/select2.min.css', array(
+    drupal_add_css(drupal_get_path('module', 'islandora_ontology_autocomplete') . '/node_modules/@bower_components/select2/dist/css/select2.min.css', array(
       'group' => CSS_DEFAULT,
       'every_page' => TRUE
     ));
