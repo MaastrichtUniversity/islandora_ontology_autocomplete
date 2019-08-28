@@ -47,7 +47,7 @@ Drupal.behaviors.islandora_ontology_autocomplete = {
         function termSelected(eventObject) {
             var obj = jQuery(eventObject.currentTarget).select2("data")[0];
             jQuery("input[name='" + eventObject.data.name + "[ontologyLabel]']").val(obj.text);
-            jQuery("input[name='" + eventObject.data.name + "[ontologyId]']").val(obj.data.ontology + ":" + obj.data.iri);
+            jQuery("input[name='" + eventObject.data.name + "[ontologyId]']").val(obj.id);
         }
 
         function getSuggestTemplate(suggestion) {
